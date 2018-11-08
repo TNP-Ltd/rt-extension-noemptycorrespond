@@ -1,5 +1,3 @@
-# This software is Copyright (c) 2018 The Networking People (NorthWest) Limited.
-#    <info@tnp.net.uk>
 <%ARGS>
 $TicketObj
 $skip_update
