@@ -1,0 +1,26 @@
+# This software is Copyright (c) 2018 The Networking People (NorthWest) Limited.
+#    <info@tnp.net.uk>
+<%ARGS>
+$TicketObj
+$skip_update
+$results
+$ARGSRef => {}
+</%ARGS>
+<%INIT>
+return unless $ARGSRef->{'SubmitTicket'} && ($ARGSRef->{'UpdateType'} eq 'response');
+
+# Count recipients in the update.
+my @allrecipients = split(/,/, $ARGSRef->{TxnRecipients});
+my %ignoredrecipients = map { $_ => 1 } @{$ARGSRef->{SquelchMailTo}};
+my $reciepientcount = 0;
+foreach (@allrecipients) {
+    unless (exists $ignoredrecipients{$_}) {
+        $reciepientcount += 1;
+    }
+}
+
+unless ($reciepientcount) {
+    push @$results, "Reply to ticket chosen, but no recipients have been selected. Please choose a reciepient of your update.";
+    $$skip_update = 1;
+}
+</%INIT>
