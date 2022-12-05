@@ -4,7 +4,7 @@ use warnings;
 
 package RT::Extension::NoEmptyCorrespond;
 
-our $VERSION = '0.01';
+our $VERSION = '1.03';
 
 =head1 NAME
 
