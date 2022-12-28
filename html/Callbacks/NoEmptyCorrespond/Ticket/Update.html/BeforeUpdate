@@ -8,7 +8,9 @@ $ARGSRef => {}
 return unless $ARGSRef->{'SubmitTicket'} && ($ARGSRef->{'UpdateType'} eq 'response');
 
 # Count recipients in the update.
-my @allrecipients = split(/,/, $ARGSRef->{TxnRecipients});
+my @allrecipients = split(/\s*,\s/, $ARGSRef->{TxnSendMailTo});
+push(@allrecipients, split(/\s*,\s/, $ARGSRef->{UpdateCc}));
+
 my %ignoredrecipients = map { $_ => 1 } @{$ARGSRef->{SquelchMailTo}};
 my $reciepientcount = 0;
 foreach (@allrecipients) {
